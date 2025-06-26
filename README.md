@@ -7,13 +7,19 @@
 1. Запустите Docker-контейнеры:
    ```bash
    docker-compose up -d
-2. Установите зависимости composer:
+2. Войдите в контейнер excdev-php:
+   ```bash
+   docker exec -it excdev-php bash
+
+Все команды ниже выполняются внутри контейнера excdev-php
+
+3. Установите зависимости composer:
    ```bash
    composer install
-3. Создание файла .env на основе .env.example:
+4. Создание файла .env на основе .env.example:
    ```bash
    cp .env.example .env
-4. Настройте .env:
+5. Настройте .env:
    ```bash
     DB_CONNECTION=mysql
     DB_HOST=excdev-mysql
@@ -21,10 +27,10 @@
     DB_DATABASE=excdev_db
     DB_USERNAME=root
     DB_PASSWORD=root
-5. Войдите в контейнер excdev-php:
+6. Генерация ключа:
    ```bash
-   docker exec -it excdev-php bash
-6. Внутри контейнера запустите миграцию:
+   php artisan key:generate
+7. Внутри контейнера запустите миграцию:
    ```bash
    php artisan migrate
 

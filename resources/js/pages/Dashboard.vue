@@ -8,7 +8,6 @@ const recentTransactions = ref([])
 
 const fetchData = async () => {
     const res = await api.get('/balance')
-    console.log(res.data)
     balance.value = res.data.balance
     recentTransactions.value = res.data.transactions
 }

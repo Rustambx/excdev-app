@@ -8,13 +8,23 @@ const password = ref('')
 const router = useRouter()
 
 const login = async () => {
-    const res = await api.post('/login', {
-        email: email.value,
-        password: password.value,
-    })
-    localStorage.setItem('token', res.data.token)
-    router.push('/')
+    try {
+        const res = await api.post('/login', {
+            email: email.value,
+            password: password.value,
+        })
+        localStorage.setItem('token', res.data.token)
+        router.push('/')
+    } catch (error) {
+        if (error.response && error.response.status === 401) {
+            alert('Неверный email или пароль')
+        } else {
+            alert('Произошла ошибка при попытке входа')
+            console.error(error)
+        }
+    }
 }
+
 </script>
 
 <template>
